@@ -1,0 +1,532 @@
+/* src/pages/product-list.css */
+:root {
+    --page-bg: #deeaec;
+    --accent: #c6dab1;
+    --content-width: 1240px;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--page-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: #222;
+}
+
+/* ---------- 去除控件边框与高光（搜索框、下拉、分页、drawer 等） ---------- */
+
+/* 输入框（search） */
+.ant-input {
+    border: none !important;
+    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.02);
+    /* border-radius: 6px; */
+}
+
+/* Select 外观（选择框） */
+.ant-select-selector {
+    border: none !important;
+    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.02);
+    /* border-radius: 6px; */
+}
+
+/* Pagination 去掉边框样式里的边框和圆角 */
+.ant-pagination {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Drawer body 通过属性 bodyStyle 也控制了，无需额外样式；但确保无默认分隔线 */
+.ant-drawer-header {
+    border-bottom: none !important;
+}
+
+/* 按钮主色与圆角 */
+.ant-btn-primary {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: #163012 !important;
+    box-shadow: none !important;
+}
+
+.ant-btn {
+    /* border-radius: 6px; */
+}
+
+/* ---------- 布局样式（保持与前次更大间距/图片更宽的修改） ---------- */
+
+.top-toolbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 120;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+.top-toolbar-inner {
+    width: var(--content-width);
+    max-width: calc(100% - 32px);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toolbar-left {
+    flex: 0 0 auto;
+}
+
+.toolbar-center {
+    flex: 1 1 720px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toolbar-center input {
+    width: 100%;
+}
+
+.toolbar-right {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.pl-content {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: 120px 20px 64px;
+    box-sizing: border-box;
+}
+
+/* 顶部 banner 布局 */
+.featured-banner {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* 左图 */
+.featured-banner .banner-left {
+    flex: 1 1 48%;
+    max-width: 48%;
+}
+
+.featured-banner .banner-left img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 右文 */
+.featured-banner .banner-right {
+    flex: 1 1 48%;
+    max-width: 48%;
+}
+
+/* 基础淡入淡出（如果需要更好效果可用动画库或更复杂样式） */
+.banner-fade {
+    opacity: 1;
+    transition: opacity 0.6s ease;
+}
+
+/* 商品卡与图片 */
+.product-card-transparent {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-row>.ant-col>.product-card-transparent {
+    width: 100%;
+}
+
+.product-image-wrap {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.product-image {
+    width: 100%;
+    height: 180px;
+    /* 比例更扁、更横 */
+    aspect-ratio: 4 / 3;
+    /* 强制横向 */
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 10px 4px;
+    background: transparent;
+}
+
+.product-title {
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+/* 行距与间距更大 */
+.ant-row {
+    margin-left: -28px;
+    margin-right: -28px;
+}
+
+.ant-row>.ant-col {
+    padding-left: 28px;
+    padding-right: 28px;
+    margin-bottom: 40px;
+}
+
+.ant-pagination {
+    margin-top: 22px;
+}
+
+/* ---------- bottom inline section ---------- */
+.bottom-section {
+    margin-top: 64px;
+    padding: 40px 0 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.brand-footer-text.panel-inline {
+    width: min(1100px, 94%);
+    padding: 28px 28px;
+    background: var(--accent);
+    /* border-radius: 12px; */
+    color: #163012;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.brand-footer-text.panel-inline h3 {
+    margin: 0 0 12px 0;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.brand-footer-text.panel-inline p {
+    margin: 10px 0;
+    font-size: 17px;
+    line-height: 1.9;
+}
+
+/* 三图一行，大图 & 间距 */
+.brand-showcase-inline {
+    display: flex;
+    gap: 36px;
+    width: min(1200px, 96%);
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 12px;
+    flex-wrap: nowrap;
+}
+
+.showcase-item-inline {
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.img-wrap-inline {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    /* border-radius: 12px; */
+}
+
+.img-wrap-inline img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+
+/* 图标：图片底部中间 */
+.img-icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 12px;
+    width: 46px;
+    height: 46px;
+    /* border-radius: 50%; */
+    background: rgba(0, 0, 0, 0.42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+    cursor: pointer;
+    transition: background .25s ease, transform .25s ease;
+}
+
+.img-icon:hover {
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* 调整：caption 上移幅度变小，overlay 初始位置更低，上移后刚好到标题下方 */
+.caption-inline {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 64px;
+    /* 位于图标上方 */
+    color: #fff;
+    text-align: left;
+    transition: transform .45s ease, opacity .3s ease;
+    z-index: 5;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+/* 当触发上移时，caption 只上移小幅度（大约 20% 高度），以停在原本标题下方 */
+.caption-up {
+    transform: translateY(-20%);
+    /* 从 bottom:64px 向上 20% */
+    opacity: 0.98;
+}
+
+/* overlay 初始状态离底部较远（看起来隐藏），上移幅度不那么大 */
+.overlay-inline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    transform: translateY(60%);
+    /* 初始更多隐藏 */
+    transition: transform .45s cubic-bezier(.22, .9, .3, 1);
+    z-index: 4;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* 显示时滑入（但不覆盖到图片顶部） */
+.overlay-show {
+    transform: translateY(12%);
+    /* 只上移到 图片底部上方的一小段，和 caption 对齐 */
+    pointer-events: auto;
+}
+
+.overlay-inner-inline {
+    padding: 18px;
+    color: #fff;
+}
+
+.overlay-show {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.overlay-inner-inline {
+    padding: 18px;
+    color: #fff;
+}
+
+.showcase-meta-inline {
+    text-align: center;
+    color: #333;
+}
+
+/* 购买按钮 hover 动画（小图标显示） */
+.buy-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    overflow: visible;
+}
+
+.buy-icon {
+    position: absolute;
+    left: -28px;
+    bottom: 6px;
+    width: 22px;
+    height: 22px;
+    /* border-radius: 6px; */
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-8px) translateY(6px);
+    opacity: 0;
+    transition: transform .28s ease, opacity .28s ease;
+    z-index: 1;
+}
+
+.buy-btn {
+    transition: transform .28s ease;
+    box-shadow: none;
+}
+
+.buy-wrap:hover .buy-btn {
+    transform: translateX(-10px);
+}
+
+.buy-wrap:hover .buy-icon {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* 响应式 */
+@media (max-width: 1200px) {
+    .brand-showcase-inline {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .showcase-item-inline {
+        width: calc(50% - 12px);
+    }
+}
+
+@media (max-width: 700px) {
+    .toolbar-center {
+        display: none;
+    }
+
+    .showcase-item-inline {
+        width: 100%;
+    }
+
+    .pl-content {
+        padding-top: 100px;
+    }
+
+    .product-image-wrap {
+        height: 260px;
+    }
+}
+
+/* product-list.css —— 底部三图简化样式与基础布局 */
+
+/* 整体底部区域容器 */
+.bottom-section.simplified-bottom {
+    margin-top: 130px;
+    padding: 36px 20px;
+    /* 如果你之前希望这个区域背景色不同，可以在这里设置，例如： */
+    /* background: #c6dab1; */
+}
+
+/* 文案部分 */
+.brand-footer-text.panel-inline {
+    max-width: 2000px;
+    margin: 0 auto 80px auto;
+    text-align: center;
+    color: #333;
+}
+
+.brand-footer-text.panel-inline h3 {
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.brand-footer-text.panel-inline p {
+    margin: 20px 0;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* 三图展示行 */
+.brand-showcase-inline.simplified-showcase {
+    /* max-width: 2000px !important; */
+    width: 100% !important;
+    margin: 0 auto;
+    display: flex;
+    gap: 24px;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 12px 8px;
+}
+
+/* 单张展项 */
+.showcase-item-inline.simple-item {
+    flex: 1 1 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+}
+
+/* 图片包裹（保持长宽比） */
+.simple-imgwrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    /* 宽度略大于高度，按你要求 */
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f6f6f6;
+}
+
+.simple-imgwrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .3s ease;
+}
+
+.simple-imgwrap img:hover {
+    transform: scale(1.03);
+}
+
+/* 每张图下方元信息 */
+.showcase-meta-inline.simple-meta {
+    text-align: center;
+    padding: 6px 4px;
+}
+
+.simple-title {
+    font-size: 16px;
+}
+
+.simple-meta p,
+.simple-meta div {
+    color: #555;
+}
+
+/* 按钮风格与页内配色（若需统一样式，可用变量） */
+.showcase-meta-inline .ant-btn {
+    border-radius: 6px;
+}
+
+/* 响应式：手机端纵向排列 */
+@media (max-width: 768px) {
+    .brand-showcase-inline.simplified-showcase {
+        flex-direction: column;
+    }
+
+    .showcase-item-inline.simple-item {
+        width: 100%;
+    }
+}
+
+.ant-drawer-body {
+    background: #cdd9e0 !important;
+}

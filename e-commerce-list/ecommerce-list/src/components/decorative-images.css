@@ -1,0 +1,132 @@
+/* decorative-images.css
+   简化 & 稳定的实现：
+   - 初始 drop-in + fade（使用 animation）
+   - hover 使用 transform + transition（避免用 animation fill-mode 导致状态冲突）
+   - 小屏幕隐藏（<=900px）
+*/
+
+/* 公共样式 */
+.decor-img {
+    display: block;
+    border-radius: 8px;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+    opacity: 0;
+    transform: translateY(-24px) scale(0.99);
+    transition: transform 360ms cubic-bezier(.2, .8, .2, 1), box-shadow 180ms ease, opacity 360ms ease;
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); */
+    pointer-events: auto;
+    will-change: transform, opacity;
+}
+
+/* 容器：fixed 不影响中间内容布局 */
+.decor-left {
+    position: fixed;
+    left: 60px !important;
+    top: 30% !important;
+    z-index: 6;
+    width: 0;
+    /* 只用 img 绝对位移，不让容器影响页面布局 */
+    pointer-events: none;
+    /* 让 img 自行接收事件 */
+}
+
+.decor-right {
+    position: fixed;
+    right: 180px !important;
+    top: 180%;
+    z-index: 6;
+    width: 0;
+    pointer-events: none;
+}
+
+/* 左侧大图（上）*/
+.decor-left-large {
+    width: 350px;
+    /* 默认大图宽度：260px（可在下面说明处调整） */
+    height: 250px;
+    margin-bottom: 70px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: dropIn 1000ms cubic-bezier(.2, .8, .2, 1) 100ms both;
+    pointer-events: auto;
+}
+
+/* 左侧小图（下）*/
+.decor-left-small {
+    width: 80px;
+    /* 默认小图宽度：180px */
+    height: 80px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: dropIn 640ms cubic-bezier(.2, .8, .2, 1) 220ms both;
+    pointer-events: auto;
+}
+
+/* 右侧小图*/
+.decor-right-small {
+    width: 102px;
+    height: 100px;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    animation: dropIn 640ms cubic-bezier(.2, .8, .2, 1) 160ms both;
+    pointer-events: auto;
+}
+
+/* drop-in 动画（fade + slight overshoot）*/
+@keyframes dropIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-28px) scale(0.98);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(8px) scale(1.02);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* hover：左右晃动（使用 transform，短时）*/
+.decor-img:hover {
+    /* hover 时轻微放大并左右偏移（以 css variable 控制方向） */
+    transform: translateX(var(--hover-x, 0)) translateY(-2px) scale(1.02);
+    transition: transform 260ms cubic-bezier(.2, .8, .2, 1), box-shadow 160ms ease;
+    /* box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18); */
+}
+
+/* 给不同位置的图片设置不同 hover X 值（左侧向右晃，右侧向左晃） */
+.decor-left .decor-img:hover {
+    --hover-x: 8px;
+}
+
+.decor-right .decor-img:hover {
+    --hover-x: -8px;
+}
+
+/* 小屏幕隐藏装饰图片 */
+@media (max-width: 900px) {
+
+    .decor-left,
+    .decor-right {
+        display: none;
+    }
+}
+
+/* 超宽屏微调位置（可按需修改） */
+@media (min-width: 1600px) {
+    .decor-left {
+        left: 36px;
+        top: 20%;
+    }
+
+    .decor-right {
+        right: 36px;
+        top: 22%;
+    }
+}

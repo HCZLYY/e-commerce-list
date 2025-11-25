@@ -1,0 +1,220 @@
+/* src/pages/home.css - 大改视觉（参考 sanaburilemon 的上部节奏与大图覆盖） */
+
+/* 颜色与变量 */
+:root {
+    --accent: #9cc6da;
+    /* 主色（焦糖色） */
+    --muted: #6b6b6b;
+    --bg: #fffaf6;
+    --card-shadow: 0 18px 48px rgba(16, 24, 40, 0.08);
+}
+
+/* 基础 container（保持一致） */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Hero (更大、更留白) */
+.hero-advanced {
+    background: linear-gradient(180deg, var(--bg) 0%, #fff7f1 100%);
+    padding: 64px 0;
+    position: relative;
+    overflow: visible;
+}
+
+.hero-viewport {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.hero-left {
+    flex: 1;
+}
+
+.hero-big-title {
+    font-size: 56px;
+    margin: 0 0 12px 0;
+    line-height: 1.02;
+    color: #222;
+}
+
+.hero-sub {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 520px;
+}
+
+/* hero right image box 带遮罩/位移 */
+.hero-right {
+    width: 56%;
+    max-width: 760px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.hero-image-wrap {
+    width: 100%;
+    height: 420px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transform: translateY(0);
+    transition: transform .9s cubic-bezier(.2, .8, .2, 1), filter .6s ease;
+}
+
+.hero-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1);
+    opacity: 0;
+    transition: opacity .6s ease, transform .8s ease;
+}
+
+.hero-image-wrap.enter img {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Hero 下滑时触发 cover/translate（模拟 sanaburilemon 主视差） */
+.hero-advanced.hero-scrolled .hero-image-wrap {
+    transform: translateY(-28px) scale(1.01);
+    filter: saturate(.96) brightness(.98);
+}
+
+/* Big visual 区块（覆盖 / 大图展示） */
+.big-visual {
+    position: relative;
+    margin-top: -40px;
+    padding: 40px 0 10px 0;
+    z-index: 1;
+}
+
+.big-visual-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.big-visual-left {
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    box-shadow: 0 12px 36px rgba(16, 24, 40, 0.06);
+}
+
+.big-visual-left h2 {
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+
+.big-visual-left p {
+    color: var(--muted);
+    margin: 0 0 12px 0;
+}
+
+.ghost-btn {
+    background: transparent;
+    border: 1px solid var(--accent);
+    padding: 8px 14px;
+    color: var(--accent);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* big visual image */
+.big-visual-right img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: transform .8s ease;
+}
+
+.big-visual-right img:hover {
+    transform: scale(1.02);
+}
+
+/* 系列与商品格 */
+.series h3,
+.featured-products h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #222;
+}
+
+.grid-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.grid-item {
+    transition: transform .35s cubic-bezier(.2, .8, .2, 1), opacity .6s ease;
+}
+
+/* Product skeleton */
+.product-skel {
+    height: 320px;
+    background: linear-gradient(90deg, #f3f3f3, #ececec, #f3f3f3);
+    border-radius: 12px;
+}
+
+/* Footer 调整 */
+.site-footer {
+    background: #fff9f5;
+    padding: 40px 0;
+    margin-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* 响应式调整 */
+@media (max-width: 1000px) {
+    .hero-viewport {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 24px;
+    }
+
+    .hero-right {
+        width: 100%;
+    }
+
+    .hero-image-wrap {
+        height: 260px;
+    }
+
+    .big-visual-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .big-visual-right img {
+        height: 320px;
+    }
+
+    .grid-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 599px) {
+    .hero-big-title {
+        font-size: 32px;
+    }
+
+    .grid-products {
+        grid-template-columns: 1fr;
+    }
+}
